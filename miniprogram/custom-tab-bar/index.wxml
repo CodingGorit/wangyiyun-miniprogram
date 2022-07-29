@@ -1,0 +1,13 @@
+<!--custom-tab-bar/index.wxml-->
+<cover-view class="tab">
+  <cover-image src="{{bg[tabIndex]}}" class="tab-bg"></cover-image>
+  <cover-view class="tab-bar">
+    <cover-view wx:for="{{icon}}" bindtap="switchTabHandle" wx:key="item" data-path="{{item.path}}" wx:for-index="index" wx:for-item="item" class="tab-bar-item">
+      <block wx:if="{{index!==tabIndex}}">
+        <cover-image class="tab-bar-img" src="{{item.icon}}" />
+        <text class="tab-bar-text">{{item.text}}</text>
+      </block>
+    </cover-view>
+  </cover-view>
+</cover-view>
+
