@@ -1,4 +1,5 @@
 // pages/songlist/index.ts
+import Consts from '../../Consts';
 const app = getApp();
 Page({
 
@@ -6,11 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    background: ['https://p1.music.126.net/s954zUZ6_LqGuG-pCoVI6Q==/109951167726093887.jpg?imageView&quality=89',
-                 'https://p1.music.126.net/-Q7-4JJnpx9h7lXAzEwLZQ==/109951167726072905.jpg?imageView&quality=89', 
-                 'https://p1.music.126.net/ZKSlILlJmZlPAdtjQ4_kww==/109951167726095678.jpg?imageView&quality=89',
-                 'https://p1.music.126.net/Srx6b0FP8S0kiOw1Zds3yQ==/109951167726062825.jpg?imageView&quality=89',
-                 'https://p1.music.126.net/z4ojoJkXKAlPsBCGe1GN-g==/109951167726073664.jpg?imageView&quality=89'],
+    background: [{"pic":'https://p1.music.126.net/s954zUZ6_LqGuG-pCoVI6Q==/109951167726093887.jpg?imageView&quality=89',
+                  "typeTitle": "新歌首发"},
+                 {"pic":'https://p1.music.126.net/-Q7-4JJnpx9h7lXAzEwLZQ==/109951167726072905.jpg?imageView&quality=89',
+                "typeTitle": "热门推荐"}, 
+                 {"pic": 'https://p1.music.126.net/ZKSlILlJmZlPAdtjQ4_kww==/109951167726095678.jpg?imageView&quality=89',
+                "typeTitle": "歌单"},
+                 {"pic":'https://p1.music.126.net/Srx6b0FP8S0kiOw1Zds3yQ==/109951167726062825.jpg?imageView&quality=89',
+                "typeTitle": "独家策划"},
+                 {"pic": 'https://p1.music.126.net/z4ojoJkXKAlPsBCGe1GN-g==/109951167726073664.jpg?imageView&quality=89',
+                "typeTitle": "热门"}],
     indicatorDots: true,
     indicatorColor: "rgba(255,255,255,0.5)",
     indicatorActiveColor: "rgba(194,12,12,1)",
@@ -56,9 +62,36 @@ Page({
           background: data
         })
       },
-      fail: function(res: any) {
-        console.log(res)
+      fail: function(err: any) {
+        // console.log(res);
+        if (err) {
+          that.setData({
+            background: that.data.background
+          })
+        }
       }
+    })
+  },
+
+  // 推荐列表数据处理
+  handleRecommendList (e: any) {
+    const id = e.currentTarget.dataset.id;
+    let url = "";
+    wx.showToast({
+      title: `click is ${id}`
+    });
+
+    switch (id) {
+      case 0:
+        // url = "../recommendList/daliyRecommend/index"
+        url = Consts.RecommendList.DailyRecommend.url;
+        break;
+      default:
+        break;
+    }
+
+    wx.redirectTo({
+      url: url
     })
   },
 
