@@ -1,6 +1,6 @@
 <!--pages/songlist/index.wxml-->
 <swiper class="swiper-container" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{background}}" wx:key="{{index}}">
+  <block wx:for="{{background}}" wx:key="this">
     <swiper-item class="swiper-item {{item}}">
       <view class="pic-container">
         <image class="banner" src="{{item.pic}}"></image>
@@ -13,7 +13,7 @@
 
 <!-- 推荐列表 -->
 <scroll-view class="recommand-group" scroll-x="{{true}}">
-  <block wx:for="{{recommendList}}" wx:key="*this">
+  <block wx:for="{{recommendList}}" wx:key="this">
     <view class="recomment-group-item">
       <view class="icon-container" data-id="{{index}}" bindtap="handleRecommendList">
         <image src="{{item.icon}}" class="icon"></image>
@@ -28,3 +28,11 @@
 <view class="separate-line"></view>
 
 <!-- 推荐歌单 -->
+<view class="recommend-song-list-group">
+  <view class="recommend-song-list-header">
+    <text class="recommend-song-list-title">推荐歌单</text>
+    <view size="mini" class="btn-more">更多 ></view>
+  </view>
+  <scroll-view class="recommend-song-list" scroll-x="{{true}}">
+  </scroll-view>
+</view>

@@ -2,7 +2,8 @@
   "pages": [
     "pages/songlist/index",
     "pages/find/index",
-    "pages/recommendList/daliyRecommend/index"
+    "pages/recommendList/daliyRecommend/index",
+    "pages/common/notFound/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

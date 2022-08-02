@@ -77,9 +77,6 @@ Page({
   handleRecommendList (e: any) {
     const id = e.currentTarget.dataset.id;
     let url = "";
-    wx.showToast({
-      title: `click is ${id}`
-    });
 
     switch (id) {
       case 0:
@@ -87,6 +84,7 @@ Page({
         url = Consts.RecommendList.DailyRecommend.url;
         break;
       default:
+        url = "../common/notFound/index"
         break;
     }
 

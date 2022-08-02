@@ -1,0 +1,6 @@
+<!--pages/common/notFound/index.wxml-->
+<view class='container'>
+  <icon type='info' size='100'></icon>
+  <view class='tips'>糟糕！页面丢失了</view>
+  <button type='primary' class='finish-btn' bindtouchend="handleBack">返回</button>
+</view>
