@@ -1,22 +1,15 @@
 // pages/songlist/index.ts
-import Consts from '../../Consts';
-const app = getApp();
+import { Consts } from '../../Consts';
+import { getBanners, getRecommendList } from '../../api/songList';
+
+// const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    background: [{"pic":'https://p1.music.126.net/s954zUZ6_LqGuG-pCoVI6Q==/109951167726093887.jpg?imageView&quality=89',
-                  "typeTitle": "新歌首发"},
-                 {"pic":'https://p1.music.126.net/-Q7-4JJnpx9h7lXAzEwLZQ==/109951167726072905.jpg?imageView&quality=89',
-                "typeTitle": "热门推荐"}, 
-                 {"pic": 'https://p1.music.126.net/ZKSlILlJmZlPAdtjQ4_kww==/109951167726095678.jpg?imageView&quality=89',
-                "typeTitle": "歌单"},
-                 {"pic":'https://p1.music.126.net/Srx6b0FP8S0kiOw1Zds3yQ==/109951167726062825.jpg?imageView&quality=89',
-                "typeTitle": "独家策划"},
-                 {"pic": 'https://p1.music.126.net/z4ojoJkXKAlPsBCGe1GN-g==/109951167726073664.jpg?imageView&quality=89',
-                "typeTitle": "热门"}],
+    banners: [] as IBanner[],
     indicatorDots: true,
     indicatorColor: "rgba(255,255,255,0.5)",
     indicatorActiveColor: "rgba(194,12,12,1)",
@@ -24,80 +17,71 @@ Page({
     interval: 3000,
     duration: 600,
 
-    recommendList: [{
-      icon: "/images/recommend-01.png",
-      text: "每日推荐"
-    }, {
-      icon: "/images/recommend-02.png",
-      text: "私人FM"
-    }, {
-      icon: "/images/recommend-03.png",
-      text: "歌单"
-    }, {
-      icon: "/images/recommend-04.png",
-      text: "排行榜"
-    }, {
-      icon: "/images/recommend-05.png",
-      text: "有声书"
-    }, {
-      icon: "/images/recommend-06.png",
-      text: "数字专辑"
-    }, {
-      icon: "/images/recommend-07.png",
-      text: "关注新歌"
-    }, {
-      icon: "/images/recommend-08.png",
-      text: "歌房"
-    }]
-  },
+    // swiper list data
+    recommendList: [] as IRecommendList[],
 
-  getBanners () {
-    let that = this;
-    wx.request({
-      url: app.globalData.baseUrl + "/banner?type=2",
-      dataType: "json",
-      success: function(res: any) {
-        const data = res.data.banners;
-        that.setData({
-          background: data
-        })
-      },
-      fail: function(err: any) {
-        // console.log(res);
-        if (err) {
-          that.setData({
-            background: that.data.background
-          })
-        }
-      }
-    })
-  },
-
-  // 推荐列表数据处理
-  handleRecommendList (e: any) {
-    const id = e.currentTarget.dataset.id;
-    let url = "";
-
-    switch (id) {
-      case 0:
-        // url = "../recommendList/daliyRecommend/index"
-        url = Consts.RecommendList.DailyRecommend.url;
-        break;
-      default:
-        url = "../common/notFound/index"
-        break;
-    }
-
-    wx.redirectTo({
-      url: url
-    })
+    // 推荐歌单
+    recommendSongList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    this.initData();
+  },
+
+  // 初始化数据
+  initData () {
     this.getBanners();
+    this.getRecommendlist();
+  },
+  
+  // 获取 banners 数据
+  async getBanners() {
+    const list = await getBanners();
+    this.data.banners = list;
+    this.setData({
+      banners: list
+    });
+  },
+
+  getRecommendlist () {
+    const list = getRecommendList();
+    this.data.recommendList = list;
+    this.setData({
+      recommendList: list
+    });
+  },
+
+  // 推荐列表数据处理
+  handleRecommendList(e: any) {
+    const id = e.currentTarget.dataset.id;
+    let url = "";
+
+    switch (id) {
+      case 0:
+        url = Consts.PATH.PageUri.DailyRecommend;
+        break;
+      default:
+        url = Consts.PATH.PageUri.NotFoundPage;
+        break;
+    }
+
+    wx.navigateTo({
+      url: url
+    });
+  },
+
+  /**
+   * 更多页面跳转
+   */
+  hnadleNaviToMoreRecommendList() {
+    wx.showToast({
+      title: "该功能并未开发完成，试试其它的吧",
+      duration: 2500,
+      icon: "error"
+    });
   },
 
   /**

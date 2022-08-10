@@ -15236,6 +15236,7 @@ Page({
          * | fail sdcard not mounted | android sdcard 挂载失败 | */ errCode: number
     }
     interface RealtimeLogManager {
+        [x: string]: any
         /** [Object RealtimeLogManager.getCurrentState()](https://developers.weixin.qq.com/miniprogram/dev/api/base/debug/RealtimeLogManager.getCurrentState.html)
          *
          * 需要基础库： `2.19.4`

@@ -41,7 +41,7 @@ swiper-item image {
   color: #ffff;
   font-size: 24rpx;
   border-radius: 20rpx 0 20rpx 0;
-  background-color: #c20c20cc;
+  /* background-color: #c20c20; */
 }
 
 .manmade {

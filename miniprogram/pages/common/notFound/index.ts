@@ -1,4 +1,4 @@
-import Consts from "../../../Consts";
+import { Consts } from "../../../Consts";
 
 // pages/common/notFound/index.ts
 Page({
@@ -15,7 +15,7 @@ Page({
    */
   handleBack() {
     wx.redirectTo({
-      url: Consts.BaseUrlPage
+      url: Consts.BasePageUrl
     });
   },
 

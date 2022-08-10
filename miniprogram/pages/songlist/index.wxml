@@ -1,11 +1,10 @@
 <!--pages/songlist/index.wxml-->
 <swiper class="swiper-container" indicator-dots="{{indicatorDots}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{background}}" wx:key="this">
+  <block wx:for="{{banners}}" wx:key="this">
     <swiper-item class="swiper-item {{item}}">
       <view class="pic-container">
         <image class="banner" src="{{item.pic}}"></image>
-        <view wx:if="{{item.typeTitle === '独家策划'}}" class="typeTitle manmade">{{item.typeTitle}}</view>
-        <view wx:else class="typeTitle">{{item.typeTitle}}</view>
+        <view class="typeTitle" style="background: {{item.titleColor}}">{{item.typeTitle}}</view>
       </view>
     </swiper-item>
   </block>
@@ -31,7 +30,7 @@
 <view class="recommend-song-list-group">
   <view class="recommend-song-list-header">
     <text class="recommend-song-list-title">推荐歌单</text>
-    <view size="mini" class="btn-more">更多 ></view>
+    <view size="mini" class="btn-more" bindtap="hnadleNaviToMoreRecommendList">更多 ></view>
   </view>
   <scroll-view class="recommend-song-list" scroll-x="{{true}}">
   </scroll-view>
